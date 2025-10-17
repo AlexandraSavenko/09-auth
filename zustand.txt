@@ -1,0 +1,21 @@
+In Zustand v4.4 and later, create can be used as a curried function — this helps when adding middlewares like persist, devtools, etc.
+
+You can think of it like this:
+
+// Step 1: create() returns a function that expects a "store initializer"
+const createStore = create<NoteDraftStore>();
+
+// Step 2: that function is then called with your initializer
+export const useNoteDraftStore = createStore((set) => ({
+  draft: initialDraft,
+  setDraft: (note) => set({ draft: note }),
+  clearDraft: () => set({ draft: initialDraft }),
+}));
+
+
+So this syntax:
+
+create<NoteDraftStore>()((set) => ({ ... }))
+
+
+is just a one-liner version of those two steps.
