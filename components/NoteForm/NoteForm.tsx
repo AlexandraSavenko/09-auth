@@ -1,10 +1,10 @@
 "use client";
 import css from "./NoteForm.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNote } from "@/lib/api/api";
 import { useRouter } from "next/navigation";
 import { NoteFormValues } from "@/types/note";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
+import { createNote } from "@/lib/api/clientApi";
 
 const NoteForm = () => {
   const router = useRouter();
