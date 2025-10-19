@@ -4,7 +4,7 @@ import css from "./NotesClient.module.css";
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/api/api";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,7 +17,7 @@ type NotesClientProps = {
 // category: string | undefined     The object must have the property, but it can hold undefined. So { category: undefined } is valid, but {} is not.
 // If category is undefined, React just omits it entirely from the props object.
 
-const NotesClient = ({category}: NotesClientProps) => {
+const NotesClient = ({ category }: NotesClientProps) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchValue] = useDebounce(searchQuery, 1000);
   const [page, setPage] = useState(1);
@@ -47,7 +47,7 @@ const NotesClient = ({category}: NotesClientProps) => {
       <header className={css.toolbar}>
         <SearchBox onChange={setSearchQuery} />
         <Pagination totalPages={totalPages} setPage={setPage} />
-        <Link href={'/notes/action/create'} className={css.button}>
+        <Link href={"/notes/action/create"} className={css.button}>
           Create note +
         </Link>
       </header>

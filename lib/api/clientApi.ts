@@ -1,6 +1,5 @@
+import { api } from "@/app/api/api"
 import { Note, NoteFormValues } from "@/types/note"
-import axios from "axios"
-
 
 interface FetchNotesResponse {
     notes: Note[],
@@ -19,15 +18,6 @@ interface FetchNoteDetails {
     updatedAt: string,
     tag: string
 }
-
-const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL + '/api',
-    withCredentials: true,
-    // headers: {
-    //     Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`
-    // }
-
-})
 export const fetchNotes = async ({category, searchValue, page}: FetchNotesParams): Promise<FetchNotesResponse> => {
 //     const searchParams: Record<string, string> = {}
 //     if(searchValue) searchParams.search = searchValue
