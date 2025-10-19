@@ -1,11 +1,12 @@
+import Link from "next/link";
 import css from "./AuthNavigation.module.css"
 
 const AuthNavigation = () => {
     return <>
      <li className={css.navigationItem}>
-  <a href="/profile" prefetch={false} className={css.navigationLink}>
+  <Link href="/profile" prefetch={false} className={css.navigationLink}>
     Profile
-  </a>
+  </Link>
 </li>
 
 <li className={css.navigationItem}>
@@ -16,15 +17,15 @@ const AuthNavigation = () => {
 </li>
 
 <li className={css.navigationItem}>
-  <a href="/sign-in" prefetch={false} className={css.navigationLink}>
+  <Link href="/sign-in" prefetch={false} className={css.navigationLink}>
     Login
-  </a>
+  </Link>
 </li>
 
 <li className={css.navigationItem}>
-  <a href="/sign-up" prefetch={false} className={css.navigationLink}>
+  <Link href="/sign-up" prefetch={false} className={css.navigationLink}>
     Sign up
-  </a>
+  </Link>
 </li>
 
     </>

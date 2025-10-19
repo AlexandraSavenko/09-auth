@@ -1,6 +1,7 @@
 import { Note, NoteFormValues } from "@/types/note"
 import axios from "axios"
 
+
 interface FetchNotesResponse {
     notes: Note[],
     totalPages: number
@@ -20,11 +21,11 @@ interface FetchNoteDetails {
 }
 
 const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL + '/api',
     withCredentials: true,
-    headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`
-    }
+    // headers: {
+    //     Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`
+    // }
 
 })
 export const fetchNotes = async ({category, searchValue, page}: FetchNotesParams): Promise<FetchNotesResponse> => {
@@ -55,4 +56,30 @@ export const createNote = async (newNote: NoteFormValues) => {
 export const deleteNote = async (noteId: string) => {
      const res = await api.delete(`/notes/${noteId}`);
     return res.data
+}
+
+export type RegisterRequest = {
+    email: string;
+    password: string;
+}
+
+export type User = {
+    id: string;
+    email: string;
+    userName?: string;
+    photoURL?: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export const register = async (data: RegisterRequest) => {
+    console.log("data", data)
+    const res = await api.post<User>('/auth/register', data);
+    console.log("register", res)
+    return res.data;
+}
+
+export const login = async (data: RegisterRequest) => {
+    const res = await api.post<User>('/auth/login', data)
+    return res.data;
 }

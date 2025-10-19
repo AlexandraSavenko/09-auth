@@ -6,6 +6,7 @@ import { isAxiosError } from 'axios';
 import { logErrorResponse } from '../../_utils/utils';
 
 export async function POST(req: NextRequest) {
+  console.log("req", req)
   try {
     const body = await req.json();
     const apiRes = await api.post('auth/login', body);
