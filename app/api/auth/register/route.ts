@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { api } from '../../api';
 import { cookies } from 'next/headers';
 import { parse } from 'cookie';
 import { isAxiosError } from 'axios';
 import { logErrorResponse } from '../../_utils/utils';
+import { api } from '@/lib/api/api';
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
     const apiRes = await api.post('auth/register', body);
-console.log(apiRes)
     const cookieStore = await cookies();
     const setCookie = apiRes.headers['set-cookie'];
 

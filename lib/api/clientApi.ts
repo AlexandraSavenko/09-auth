@@ -1,5 +1,5 @@
-import { api } from "@/app/api/api"
 import { Note, NoteFormValues } from "@/types/note"
+import { api } from "./api"
 
 interface FetchNotesResponse {
     notes: Note[],
