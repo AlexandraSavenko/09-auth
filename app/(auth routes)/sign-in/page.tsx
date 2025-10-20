@@ -3,6 +3,7 @@ import { useState } from "react";
 import css from "./SignInPage.module.css";
 import { useRouter } from "next/navigation";
 import { login, RegisterRequest } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 interface ApiError {
   response?: {
     data?: {
@@ -14,11 +15,13 @@ interface ApiError {
 const SignInPage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+  const setUser = useAuthStore(state => state.setUser)
   const handleSubmit = async (FormData: FormData) => {
     try {
       const formValues = Object.fromEntries(FormData) as RegisterRequest;
       const res = await login(formValues);
       if (res) {
+        setUser(res)
         router.push("/profile");
       } else {
         setError("Invalid email or password");

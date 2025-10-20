@@ -3,7 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import css from "./SignUpPage.module.css";
-import {register, RegisterRequest } from "@/lib/api/clientApi";
+import { register, RegisterRequest } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 interface ApiError {
   response?: {
     data?: {
@@ -15,14 +16,13 @@ interface ApiError {
 const SignUpPage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
-
+  const setUser = useAuthStore((state) => state.setUser);
   const handleSubmit = async (formData: FormData) => {
-
     try {
       const formValues = Object.fromEntries(formData) as RegisterRequest;
       const res = await register(formValues);
       if (res) {
-        console.log(res);
+        setUser(res);
         router.push("/profile");
       } else {
         setError("Invalid email or password");
@@ -67,7 +67,7 @@ const SignUpPage = () => {
           </button>
         </div>
       </form>
-      {error && <p>{error}</p> }
+      {error && <p>{error}</p>}
     </main>
   );
 };

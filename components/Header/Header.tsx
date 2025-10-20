@@ -12,7 +12,7 @@ return <header className={css.header}>
   <nav aria-label="Main Navigation">
     <ul className={css.navigation}>
       <li>
-        <Link href="/">Home</Link>
+        <Link href="/profile">Profile</Link>
       </li>
       <li>
         <TagsMenu/>
